@@ -139,7 +139,7 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           source: "docker-compose.production.yml"
           target: "kittygram"
-      - name: Executing remote ssh commands to deploy
+      - name: Executing remote SSH commands to deploy
         uses: appleboy/ssh-action@master
         env:
           DOCKER_LOGIN: ${{ secrets.DOCKER_USERNAME }}
