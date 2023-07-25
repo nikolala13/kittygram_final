@@ -13,24 +13,28 @@ services:
       - kittygram_pg_data:/var/lib/postgresql/data
 
   backend:
-    build: ./backend/
+    image: nikolala13/kittygram_backend
     env_file: .env
     volumes:
       - kittygram_static:/backend_static
       - media:/app/media/
+    depends_on:
+      - db
 
   frontend:
+    image: nikolala13/kittygram_frontend
     env_file: .env
-    build: ./frontend/
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - kittygram_static:/frontend_static
-  
+
   gateway:
-    build: ./nginx/
+    image: nikolala13/kittygram_gateway
     env_file: .env
     volumes:
       - kittygram_static:/static
       - media:/app/media/
     ports:
-      - ${NGINX_PORT}:${HOST_PORT}
+      - ${NGINX_PORT}:${HOST_PORT} 
+    depends_on:
+      - db
