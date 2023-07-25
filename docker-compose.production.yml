@@ -17,7 +17,7 @@ services:
     env_file: .env
     volumes:
       - kittygram_static:/backend_static
-      - media:/app/media/
+      - media:/media/
     depends_on:
       - db
 
@@ -33,7 +33,7 @@ services:
     env_file: .env
     volumes:
       - kittygram_static:/static
-      - media:/app/media/
+      - media:/media/
     ports:
       - ${NGINX_PORT}:${HOST_PORT} 
     depends_on:
